@@ -14,7 +14,7 @@ class AuthService {
             const user = await User.create({ usn: usn, pwd: hashed })
             return user;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             throw new Error(`Register failed: ${error.message}`);
         }
     }
@@ -40,7 +40,7 @@ class AuthService {
             return { token, user: { userId: userInDb.id, usn: userInDb.usn } }
 
         } catch (error) {
-            console.error(error)
+            // console.error(error)
             throw new Error(`Login failed: ${error}`);
         }
     }
