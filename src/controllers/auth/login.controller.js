@@ -18,13 +18,13 @@ export async function postLogin(req, res) {
 
     } catch (error) {
         if (error instanceof SyntaxError) {
-            res.status(400).json({
+            res.json({
                 success: false,
                 message: error.message
             })
         }
         else {
-            res.status(500).json({
+            res.json({
                 success: false,
                 message: error.message
             })
