@@ -28,8 +28,7 @@ class AuthService {
             }
 
             // Compare input and db password
-            const hashed = await bcrypt.hash(pwd, +process.env.HASH_ROUND)
-            if (!(await bcrypt.compare(hashed, userInDb.pwd))) {
+            if (!(await bcrypt.compare(pwd, userInDb.pwd))) {
                 throw new Error("Invalid username or password");
             }
 
