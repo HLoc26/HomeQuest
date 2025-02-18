@@ -6,7 +6,10 @@ const initState = {
 const reducer = (state, action) => {
     switch (action.type) {
         case LOGIN:
-            break;
+            return {
+                ...state,
+                user: action.payload
+            };
         case LOGOUT:
             break;
         default:
