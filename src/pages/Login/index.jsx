@@ -1,10 +1,16 @@
 import { useState } from "react";
+
 import api from "../../api/axios.js";
+import { useStore } from "../../store/hooks.js";
+import { actions } from "../../store";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 	const [inputField, setInput] = useState({ usn: "", pwd: "" });
 	const [errorText, setErrorText] = useState("");
 	const [showError, setShowError] = useState(false);
+	const [state, dispatch] = useStore();
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -14,6 +20,8 @@ function Login() {
 		const response = await api.post("/login", user, { withCredentials: true });
 		if (response.data.success) {
 			console.log(response.data);
+			dispatch(actions.logIn(response.data.user));
+			navigate("/user");
 		} else {
 			setErrorText("Invalid username or password");
 			setShowError(true);
