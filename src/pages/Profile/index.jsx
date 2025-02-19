@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useStore } from "../../store";
 
 function Profile() {
@@ -6,8 +5,7 @@ function Profile() {
 
 	const user = state.user;
 
-	if (!user) return <Navigate to="/login" />;
-	console.log(user);
+	console.log("Profile:", user);
 
 	return (
 		<>
