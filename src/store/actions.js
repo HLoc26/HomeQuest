@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "./constants";
+import { LOGIN, LOGOUT, SET_USER } from "./constants";
 
 export const logIn = (payload) => ({
 	type: LOGIN,
@@ -7,5 +7,10 @@ export const logIn = (payload) => ({
 
 export const logOut = (payload) => ({
 	type: LOGOUT,
+	payload,
+});
+
+export const setUser = (payload) => ({
+	type: SET_USER,
 	payload,
 });
