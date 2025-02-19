@@ -7,12 +7,12 @@ import App from "./App.jsx";
 import { GlobalProvider } from "./store";
 
 createRoot(document.getElementById("root")).render(
-	<StrictMode>
-		<GlobalProvider>
-			<Router>
-				<App />
-			</Router>
-		</GlobalProvider>
-	</StrictMode>
+	// <StrictMode>
+	<GlobalProvider>
+		<Router>
+			<App />
+		</Router>
+	</GlobalProvider>
+	// </StrictMode>
 );
 
