@@ -2,7 +2,7 @@ import { Task } from "../models/index.js";
 
 class TaskService {
 	static getAll() {
-		return Task.findAll();
+		return Task.findAll({ where: { status: "PENDING" } });
 	}
 
 	static getAssigned(id) {
