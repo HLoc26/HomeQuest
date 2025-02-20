@@ -16,7 +16,7 @@ export async function getUser(req, res) {
 	} catch (error) {
 		res.json({
 			success: false,
-			message: "failed",
+			message: error.message,
 		});
 	}
 }
