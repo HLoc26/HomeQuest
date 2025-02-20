@@ -1,7 +1,8 @@
 export const handleRequest = (controller) => {
 	return async (req, res) => {
 		try {
-			const { payload, cookie } = await controller(req);
+			const payload = await controller(req);
+			console.log(payload);
 			res.json({
 				success: true,
 				payload,
