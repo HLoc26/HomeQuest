@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useStore } from "../../store";
 import axios from "../../api/axios.js";
 
@@ -10,31 +10,35 @@ function Dashboard() {
 
 	const user = state.user;
 
-	console.log("Dashboard", user);
+	// console.log("Dashboard", user);
+
+	const fetchData = useCallback(async () => {
+		try {
+			const [all, assigned, created] = await Promise.all([
+				axios.get("/task/all", { withCredentials: true }),
+				axios.get("/task/assigned", { withCredentials: true }),
+				axios.get("/task/created", { withCredentials: true }),
+			]);
+
+			// console.log("all", all.data);
+			if (all.data.success) setAllTasks(all.data.payload);
+			else console.error("All error", all.data.message);
+
+			// console.log("assign", assigned.data);
+			if (assigned.data.success) setAssignedTasks(assigned.data.payload);
+			else console.error("Assigned error", assigned.data.message);
+
+			// console.log("created", created.data);
+			if (created.data.success) setCreatedTasks(created.data.payload);
+			else console.error("Created error", created.data.message);
+		} catch (error) {
+			console.error("Lỗi khi tải dữ liệu:", error);
+		}
+	}, []);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			const all = await axios.get("/task/all", { withCredentials: true });
-			if (all.data.success) {
-				setAllTasks(all.data.tasks);
-			} else {
-				console.log("All error", all.data.message);
-			}
-			const assigned = await axios.get("/task/assigned", { withCredentials: true });
-			if (assigned.data.success) {
-				setAssignedTasks(assigned.data.tasks);
-			} else {
-				console.log("Assigned error", assigned.message);
-			}
-			const created = await axios.get("/task/created", { withCredentials: true });
-			if (created.data.success) {
-				setCreatedTasks(created.data.tasks);
-			} else {
-				console.log("Created error", created.message);
-			}
-		};
 		fetchData();
-	}, []);
+	}, [fetchData]);
 
 	console.log(allTasks);
 	console.log(assignedTasks);
