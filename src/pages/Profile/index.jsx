@@ -5,8 +5,6 @@ function Profile() {
 
 	const user = state.user;
 
-	console.log("Profile:", user);
-
 	return (
 		<>
 			<h1>
