@@ -1,44 +1,36 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 
 import axios from "../api/axios";
 import { useStore, actions } from "../store";
 
 function ProtectedRoute() {
 	const [state, dispatch] = useStore();
+	const [isLoading, setIsLoading] = useState(true); // Add loading state
 
-	console.log(state);
-
-	useLayoutEffect(() => {
-		const fetchUser = async () => {
+	useEffect(() => {
+		const validateAuth = async () => {
 			try {
-				const response = await axios.get("/user", { withCredentials: true });
-				console.log("Data:", response.data);
-				if (response.data) {
+				setIsLoading(true);
+				const response = await axios.get("/user", {
+					withCredentials: true,
+				});
+				if (response.data.user) {
 					dispatch(actions.setUser(response.data.user));
-				} else {
-					// Có thể thêm hành động nếu không có user
-					console.log("Không tìm thấy user");
 				}
 			} catch (error) {
-				console.error("Lỗi khi lấy thông tin người dùng:", error);
+				console.error("Auth error:", error);
+			} finally {
+				setIsLoading(false);
 			}
 		};
 
-		// Chỉ gọi API nếu chưa có user
-		if (!state.user) {
-			fetchUser();
-			console.log("user30:", state.user);
-		}
-	});
+		validateAuth();
+	}, []);
 
-	const user = state.user;
-	console.log("35", user);
-	if (!user) {
-		return <Navigate to="/login" />;
-	}
+	if (isLoading) return <div>Loading...</div>;
+	if (!state.user) return <Navigate to="/login" />;
 
-	console.log("ProtectedRoute:", user);
 	return <Outlet />;
 }
 
