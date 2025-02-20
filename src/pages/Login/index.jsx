@@ -19,7 +19,7 @@ function Login() {
 
 		const response = await api.post("/login", user, { withCredentials: true });
 		if (response.data.success) {
-			console.log(response.data);
+			// console.log(response.data);
 			dispatch(actions.logIn(response.data.user));
 			navigate("/user");
 		} else {
