@@ -12,9 +12,10 @@ function ProtectedRoute() {
 		const validateAuth = async () => {
 			try {
 				setIsLoading(true);
-				const response = await axios.get("/user", {
+				const response = await axios.get("/user/me", {
 					withCredentials: true,
 				});
+				// console.log(response.data);
 				if (response.data.user) {
 					dispatch(actions.setUser(response.data.user));
 				}

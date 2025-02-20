@@ -21,7 +21,7 @@ function Login() {
 		if (response.data.success) {
 			// console.log(response.data);
 			dispatch(actions.logIn(response.data.user));
-			navigate("/user");
+			navigate("/user/me");
 		} else {
 			setErrorText("Invalid username or password");
 			setShowError(true);
