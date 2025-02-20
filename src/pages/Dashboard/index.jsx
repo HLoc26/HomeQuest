@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { useStore } from "../../store";
 import axios from "../../api/axios.js";
+import TaskList from "../../components/TaskList/TaskList.jsx";
 
 function Dashboard() {
 	const [state] = useStore();
@@ -40,48 +42,17 @@ function Dashboard() {
 		fetchData();
 	}, [fetchData]);
 
-	console.log(allTasks);
-	console.log(assignedTasks);
-
 	return (
 		<>
 			<h1>Bảng nhiệm vụ</h1>
 			<h2>Nhiệm vụ chưa nhận</h2>
-			<ul style={{ listStyle: "none" }}>
-				{allTasks.length > 0 ? (
-					allTasks.map((task) => (
-						<li key={task.id}>
-							{task.title} - {task.type} - {task.difficulty} - xp: {task.xp_reward} - vàng: {task.gold_reward}
-						</li>
-					))
-				) : (
-					<p>Không có nhiệm vụ chưa nhận</p>
-				)}
-			</ul>
+			<TaskList tasks={allTasks} emptyText="Không có nhiệm vụ chưa nhận" />
+
 			<h2>Nhiệm vụ đã nhận</h2>
-			<ul>
-				{assignedTasks.length > 0 ? (
-					assignedTasks.map((task) => (
-						<li key={task.id}>
-							{task.title} - {task.type} - {task.difficulty} - xp: {task.xp_reward} - vàng: {task.gold_reward}
-						</li>
-					))
-				) : (
-					<p>Chưa nhận nhiệm vụ nào</p>
-				)}
-			</ul>
+			<TaskList tasks={assignedTasks} emptyText="Bạn chưa nhận nhiệm vụ nào" />
+
 			<h2>Nhiệm vụ đã tạo</h2>
-			<ul>
-				{createdTasks.length > 0 ? (
-					createdTasks.map((task) => (
-						<li key={task.id}>
-							{task.title} - {task.type} - {task.difficulty} - xp: {task.xp_reward} - vàng: {task.gold_reward}
-						</li>
-					))
-				) : (
-					<p>Chưa tạo nhiệm vụ nào</p>
-				)}
-			</ul>
+			<TaskList tasks={createdTasks} emptyText="Bạn chưa tạo nhiệm vụ nào" />
 		</>
 	);
 }
