@@ -1,8 +1,10 @@
 import express from "express";
 import "dotenv/config";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
 import syncDatabase from "./config/syncdb.js";
 import router from "./routes/index.routes.js";
-import cors from "cors";
 
 const PORT = process.env.PORT;
 const HOST = process.env.HOST_NAME;
@@ -16,6 +18,8 @@ app.use(
 		credentials: true,
 	})
 );
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
