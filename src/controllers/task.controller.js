@@ -18,8 +18,22 @@ const TaskController = {
 	getAssigned: async (req, res) => {
 		try {
 			const user = decode(req.cookies.jwt);
-
-			const tasks = await TaskService.getAssigned(user.userId); // Should have {where: {status: "PENDING"}}
+			const tasks = await TaskService.getAssigned(user.userId);
+			res.json({
+				success: true,
+				tasks,
+			});
+		} catch (error) {
+			res.json({
+				success: false,
+				message: error.message,
+			});
+		}
+	},
+	getCreated: async (req, res) => {
+		try {
+			const user = decode(req.cookies.jwt);
+			const tasks = await TaskService.getCreated(user.userId);
 			res.json({
 				success: true,
 				tasks,
