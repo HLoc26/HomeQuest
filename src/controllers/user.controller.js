@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { decode } from "../utils/decodeJwt.js";
 import "dotenv/config";
 
 export async function getUser(req, res) {
@@ -6,7 +6,7 @@ export async function getUser(req, res) {
 	// console.log("token", token);
 
 	try {
-		const user = jwt.decode(token, process.env.JWT_SECRET);
+		const user = decode(token);
 
 		console.log("HELLO", user);
 		res.json({
