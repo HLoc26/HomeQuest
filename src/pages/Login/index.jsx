@@ -1,9 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import api from "../../api/axios.js";
 import { useStore } from "../../store/hooks.js";
 import { actions } from "../../store";
-import { useNavigate } from "react-router-dom";
 
 function Login() {
 	const [inputField, setInput] = useState({ usn: "", pwd: "" });
@@ -20,7 +20,7 @@ function Login() {
 		const response = await api.post("/login", user, { withCredentials: true });
 		if (response.data.success) {
 			// console.log(response.data);
-			dispatch(actions.logIn(response.data.user));
+			dispatch(actions.logIn(response.data.payload));
 			navigate("/user/me");
 		} else {
 			setErrorText("Invalid username or password");
