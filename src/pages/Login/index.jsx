@@ -17,13 +17,18 @@ function Login() {
 
 		const user = { usn: inputField.usn, pwd: inputField.pwd };
 
-		const response = await api.post("/login", user, { withCredentials: true });
-		if (response.data.success) {
-			// console.log(response.data);
-			dispatch(actions.logIn(response.data.payload));
-			navigate("/user/me");
-		} else {
-			setErrorText("Invalid username or password");
+		try {
+			const response = await api.post("/login", user, { withCredentials: true });
+			if (response.data.success) {
+				// console.log(response.data);
+				dispatch(actions.logIn(response.data.payload));
+				navigate("/user/me");
+			} else {
+				setErrorText("Invalid username or password");
+				setShowError(true);
+			}
+		} catch (error) {
+			setErrorText("Login failed. Please try again.");
 			setShowError(true);
 		}
 	};

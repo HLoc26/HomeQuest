@@ -20,7 +20,7 @@ function ProtectedRoute() {
 					dispatch(actions.setUser(response.data.payload));
 				}
 			} catch (error) {
-				console.error("Auth error:", error);
+				console.error("Auth error:", error.message);
 			} finally {
 				setIsLoading(false);
 			}
