@@ -15,11 +15,11 @@ const TaskController = {
 			});
 		}
 	},
-	getMe: async (req, res) => {
+	getAssigned: async (req, res) => {
 		try {
 			const user = decode(req.cookies.jwt);
 
-			const tasks = await TaskService.getMe(user.userId); // Should have {where: {status: "PENDING"}}
+			const tasks = await TaskService.getAssigned(user.userId); // Should have {where: {status: "PENDING"}}
 			res.json({
 				success: true,
 				tasks,

@@ -3,6 +3,6 @@ const taskRouter = Router();
 import TaskController from "../controllers/task.controller.js";
 
 taskRouter.get("/all", TaskController.getAll);
-taskRouter.get("/me", TaskController.getMe);
+taskRouter.get("/assigned", TaskController.getAssigned);
 
 export default taskRouter;

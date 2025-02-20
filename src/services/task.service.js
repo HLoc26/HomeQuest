@@ -5,7 +5,7 @@ class TaskService {
 		return await Task.findAll();
 	}
 
-	static async getMe(id) {
+	static async getAssigned(id) {
 		return await Task.findAll({ where: { assigned_to: id } });
 	}
 }
