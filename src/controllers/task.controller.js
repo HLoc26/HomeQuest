@@ -5,14 +5,17 @@ const TaskController = {
 	getAll: handleRequest(async () => {
 		return await TaskService.getAll();
 	}),
-	getAssigned: async (req) => {
+	getAssigned: handleRequest(async (req) => {
 		const user = decode(req.cookies.jwt);
+		if (!user) {
+			throw new Error("user not found");
+		}
 		return await TaskService.getAssigned(user.userId);
-	},
-	getCreated: async (req) => {
+	}),
+	getCreated: handleRequest(async (req) => {
 		const user = decode(req.cookies.jwt);
 		return await TaskService.getCreated(user.userId);
-	},
+	}),
 };
 
 export default TaskController;
