@@ -18,7 +18,7 @@ export async function postLogin(req, res) {
 
 		res.status(200).json({
 			success: true,
-			user,
+			payload: user,
 		});
 	} catch (error) {
 		res.json({
