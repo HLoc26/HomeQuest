@@ -25,7 +25,7 @@ function Login() {
 			if (response.data.success) {
 				// console.log(response.data);
 				dispatch(actions.logIn(response.data.payload));
-				navigate("/user/me");
+				navigate("");
 			} else {
 				setErrorText("Invalid username or password");
 				setShowError(true);
@@ -45,7 +45,7 @@ function Login() {
 					</Card.Header>
 					<Card.Body>
 						{showError && (
-							<Alert style={{ color: "red" }} variant="danger" className="p-2">
+							<Alert variant="danger" className="p-2">
 								{errorText}
 							</Alert>
 						)}
