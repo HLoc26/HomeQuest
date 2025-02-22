@@ -1,3 +1,5 @@
+import { Alert, Button, Card, Form, InputGroup } from "react-bootstrap";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +11,7 @@ function Login() {
 	const [inputField, setInput] = useState({ usn: "", pwd: "" });
 	const [errorText, setErrorText] = useState("");
 	const [showError, setShowError] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const [state, dispatch] = useStore();
 	const navigate = useNavigate();
 
@@ -35,30 +38,58 @@ function Login() {
 
 	return (
 		<>
-			<form action="" onSubmit={handleSubmit}>
-				<input
-					type="text"
-					value={inputField.usn}
-					onChange={(e) => {
-						setShowError(false);
-						setInput({ ...inputField, usn: e.target.value });
-					}}
-					placeholder="Username"
-				/>
-				<br />
-				<input
-					type="text" /* Should be type="password" */
-					value={inputField.pwd}
-					onChange={(e) => {
-						setShowError(false);
-						setInput({ ...inputField, pwd: e.target.value });
-					}}
-					placeholder="Password"
-				/>
-				<br />
-				{showError && <p style={{ color: "red" }}>{errorText}</p>}
-				<button type="submit">Login</button>
-			</form>
+			<Form onSubmit={handleSubmit} className="d-flex justify-content-center align-items-center vh-100">
+				<Card className="p-4 shadow rounded">
+					<Card.Header className="rounded">
+						<h2 className="text-center">Login</h2>
+					</Card.Header>
+					<Card.Body>
+						{showError && (
+							<Alert style={{ color: "red" }} variant="danger" className="p-2">
+								{errorText}
+							</Alert>
+						)}
+						<InputGroup className="mb-3">
+							<InputGroup.Text>
+								<i className="bi bi-person-fill"></i>
+							</InputGroup.Text>
+							<Form.Control
+								type="text"
+								value={inputField.usn}
+								onChange={(e) => {
+									setShowError(false);
+									setInput({ ...inputField, usn: e.target.value });
+								}}
+								placeholder="Username"
+							/>
+						</InputGroup>
+						<InputGroup>
+							<InputGroup.Text>
+								<i className="bi bi-key-fill"></i>
+							</InputGroup.Text>
+							<Form.Control
+								type={showPassword ? "text" : "password"}
+								value={inputField.pwd}
+								onChange={(e) => {
+									setShowError(false);
+									setInput({ ...inputField, pwd: e.target.value });
+								}}
+								placeholder="Password"
+							/>
+							<Button
+								onClick={() => {
+									setShowPassword((prev) => !prev);
+								}}
+								variant="light"
+								className="border"
+							>
+								{showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
+							</Button>
+						</InputGroup>
+					</Card.Body>
+					<Button type="submit">Login</Button>
+				</Card>
+			</Form>
 		</>
 	);
 }
