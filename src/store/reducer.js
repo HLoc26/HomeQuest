@@ -1,6 +1,7 @@
-import { LOGIN, LOGOUT, SET_USER } from "./constants";
+import { LOGIN, LOGOUT, SET_THEME, SET_USER } from "./constants";
 const initState = {
 	user: null,
+	theme: "light",
 };
 
 const reducer = (state, action) => {
@@ -17,6 +18,12 @@ const reducer = (state, action) => {
 				...state,
 				user: action.payload,
 			};
+		case SET_THEME:
+			return {
+				...state,
+				theme: action.payload,
+			};
+
 		default:
 			throw new Error("Invalid action");
 	}
