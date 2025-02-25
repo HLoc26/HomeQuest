@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import ThemeButton from "./components/ThemeButton/ThemeButton.jsx";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
@@ -16,6 +17,7 @@ function App() {
 					<Route path="/user/me" element={<Profile />} />
 				</Route>
 			</Routes>
+			<ThemeButton />
 		</>
 	);
 }
