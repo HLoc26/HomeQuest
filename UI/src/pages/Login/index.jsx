@@ -80,7 +80,7 @@ function Login() {
 								onClick={() => {
 									setShowPassword((prev) => !prev);
 								}}
-								variant="light"
+								variant={state.theme}
 								className="border"
 							>
 								{showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}
