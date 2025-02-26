@@ -18,7 +18,7 @@ function ThemeButton() {
 	};
 
 	return (
-		<Button className="position-absolute bottom-0 end-0" onClick={handleChangeTheme}>
+		<Button onClick={handleChangeTheme} variant={theme}>
 			{theme == "light" ? <i className="bi bi-sun-fill"></i> : <i className="bi bi-moon-fill"></i>}
 		</Button>
 	);
