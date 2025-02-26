@@ -40,7 +40,6 @@ Task.init(
 	},
 	{
 		sequelize,
-		modelName: "task",
 		timestamps: true,
 		hooks: {
 			beforeValidate: (task) => {
