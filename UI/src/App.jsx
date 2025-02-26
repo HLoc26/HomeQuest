@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
+import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx";
 
 function App() {
 	const [state, dispatch] = useStore();
@@ -28,8 +29,22 @@ function App() {
 			<Routes>
 				<Route path="/login" element={<Login />} />
 				<Route element={<ProtectedRoute />}>
-					<Route path="/" element={<Dashboard />} />
-					<Route path="/user/me" element={<Profile />} />
+					<Route
+						path="/"
+						element={
+							<MainLayout>
+								<Dashboard />
+							</MainLayout>
+						}
+					/>
+					<Route
+						path="/user/me"
+						element={
+							<MainLayout>
+								<Profile />
+							</MainLayout>
+						}
+					/>
 				</Route>
 			</Routes>
 		</>
