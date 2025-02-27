@@ -1,12 +1,14 @@
+import { memo } from "react";
+
 import styles from "./TaskList.module.css";
-function TaskList({ tasks, emptyText }) {
+import TaskItem from "../TaskItem/TaskItem";
+function TaskList({ tasks, emptyText, onTaskSelect }) {
+	// prettier-ignore
 	return (
 		<ul className={styles.taskList}>
 			{tasks instanceof Array && tasks.length > 0 ? (
 				tasks.map((task) => (
-					<li key={task.id}>
-						{task.title} - {task.type} - {task.difficulty} - xp: {task.xp_reward} - vàng: {task.gold_reward}
-					</li>
+					<TaskItem key={task.id} task={task} setSelectedTask={ onTaskSelect } />
 				))
 			) : (
 				<p>{emptyText}</p>
@@ -15,4 +17,4 @@ function TaskList({ tasks, emptyText }) {
 	);
 }
 
-export default TaskList;
+export default memo(TaskList);
