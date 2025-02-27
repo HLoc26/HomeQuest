@@ -1,4 +1,13 @@
 .taskContainer {
-	max-height: 100vh;
+	max-height: 80vh;
 	overflow-y: scroll;
+	overflow-x: hidden;
+}
+@media (min-width: 1400px) {
+	.offcanvasXXL {
+		--bs-offcanvas-height: auto;
+		--bs-offcanvas-border-width: 0;
+		background-color: transparent !important;
+		display: none !important;
+	}
 }

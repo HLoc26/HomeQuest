@@ -53,7 +53,7 @@ function Dashboard() {
 			</Button>
 			<div className="row">
 				{/* TaskList hiển thị bình thường trên màn hình lớn */}
-				<div className={`col-sm-3 d-none d-sm-block ${styles.taskContainer}`}>
+				<div className={`col-sm-4 d-none d-sm-block ${styles.taskContainer}`}>
 					<h2>All tasks</h2>
 					<TaskList tasks={allTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 					<h2>Assigned tasks</h2>
@@ -68,11 +68,11 @@ function Dashboard() {
 				</div>
 			</div>
 			{/* Offcanvas cho TaskList trên màn hình nhỏ */}
-			<Offcanvas show={showOffcanvas} onHide={handleClose} responsive="sm">
+			<Offcanvas show={showOffcanvas} onHide={handleClose} responsive="xxl" className={styles.offcanvasXXL}>
 				<Offcanvas.Header closeButton>
 					<Offcanvas.Title>TaskList</Offcanvas.Title>
 				</Offcanvas.Header>
-				<Offcanvas.Body>
+				<Offcanvas.Body style={{ overflowY: "hidden" }}>
 					<div className={styles.taskContainer}>
 						<h2>All tasks</h2>
 						<TaskList
