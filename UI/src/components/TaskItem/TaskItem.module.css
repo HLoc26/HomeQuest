@@ -1,0 +1,19 @@
+.taskItem {
+	padding: 10px;
+	border-radius: 5px;
+	transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+	cursor: pointer;
+}
+
+/* Hover effect cho Light Mode */
+[data-bs-theme="light"] .taskItem:hover {
+	background-color: #f0f0f0;
+	transform: scale(1.02);
+}
+
+/* Hover effect cho Dark Mode */
+[data-bs-theme="dark"] .taskItem:hover {
+	background-color: #333;
+	transform: scale(1.02);
+	color: #fff;
+}
