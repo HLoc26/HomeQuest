@@ -1,7 +1,7 @@
 import { LOGIN, LOGOUT, SET_THEME, SET_USER } from "./constants";
 const initState = {
 	user: null,
-	theme: "light",
+	theme: "dark",
 };
 
 const reducer = (state, action) => {
