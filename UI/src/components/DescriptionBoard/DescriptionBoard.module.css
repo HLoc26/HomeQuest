@@ -1,3 +1,14 @@
 .descriptionBoard {
 	overflow-wrap: anywhere;
+	height: 100%;
+}
+
+.rewardPanel {
+	gap: 5%;
+}
+
+.description {
+	max-height: 500px;
+	height: 80%;
+	overflow-y: scroll;
 }
