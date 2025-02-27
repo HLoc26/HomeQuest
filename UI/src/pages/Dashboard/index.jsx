@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { useStore } from "../../store";
-import styles from "./Dashboard.module.css";
-import axios from "../../api/axios.js";
-import TaskList from "../../components/TaskList/TaskList.jsx";
-import DescriptionBoard from "../../components/DescriptionBoard/DescriptionBoard.jsx";
 import { Button, Offcanvas } from "react-bootstrap";
+import axios from "../../api/axios.js";
+import styles from "./Dashboard.module.css";
+import { useStore } from "../../store";
+import { TaskList, DescriptionBoard } from "../../components";
 
 function Dashboard() {
 	const [state] = useStore();

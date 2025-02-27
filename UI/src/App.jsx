@@ -3,11 +3,8 @@ import { useStore } from "./store";
 import { useEffect } from "react";
 
 import "./App.css";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import MainLayout from "./components/Layout/MainLayout/MainLayout.jsx";
+import { ProtectedRoute, MainLayout } from "./components";
+import { Login, Dashboard, Profile } from "./pages";
 
 function App() {
 	const [state, dispatch] = useStore();
