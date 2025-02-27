@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useStore } from "../../store";
 import axios from "../../api/axios.js";
 import TaskList from "../../components/TaskList/TaskList.jsx";
+import DescriptionBoard from "../../components/DescriptionBoard/DescriptionBoard.jsx";
 
 function Dashboard() {
 	const [state] = useStore();
@@ -43,17 +44,22 @@ function Dashboard() {
 	}, [fetchData]);
 
 	return (
-		<>
-			<h1>Bảng nhiệm vụ</h1>
-			<h2>Nhiệm vụ chưa nhận</h2>
-			<TaskList tasks={allTasks} emptyText="Không có nhiệm vụ chưa nhận" />
-
-			<h2>Nhiệm vụ đã nhận</h2>
-			<TaskList tasks={assignedTasks} emptyText="Bạn chưa nhận nhiệm vụ nào" />
-
-			<h2>Nhiệm vụ đã tạo</h2>
-			<TaskList tasks={createdTasks} emptyText="Bạn chưa tạo nhiệm vụ nào" />
-		</>
+		<div className="d-grid">
+			<h1 className="col-sm-12 text-center">Bảng nhiệm vụ</h1>
+			<div className="row">
+				<div className="col-sm-4">
+					<h2>All tasks</h2>
+					<TaskList tasks={allTasks} emptyText="None" />
+					<h2>Assigned tasks</h2>
+					<TaskList tasks={assignedTasks} emptyText="None" />
+					<h2>Created tasks</h2>
+					<TaskList tasks={createdTasks} emptyText="None" />
+				</div>
+				<div className="col-sm-8">
+					<DescriptionBoard description="Hello" />
+				</div>
+			</div>
+		</div>
 	);
 }
 
