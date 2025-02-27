@@ -1,8 +1,9 @@
-function DescriptionBoard({ description }) {
+import styles from "./DescriptionBoard.module.css";
+function DescriptionBoard({ task }) {
 	return (
-		<>
-			<h2>{description}</h2>
-		</>
+		<div>
+			<h2>{task?.description ? task.description : "Chọn một nhiệm vụ để xem"}</h2>
+		</div>
 	);
 }
 
