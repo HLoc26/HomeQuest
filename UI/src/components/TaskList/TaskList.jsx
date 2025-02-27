@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import styles from "./TaskList.module.css";
-import TaskItem from "../TaskItem/TaskItem";
+import TaskItem from "~/components/TaskItem/TaskItem";
 function TaskList({ tasks, emptyText, onTaskSelect }) {
 	// prettier-ignore
 	return (

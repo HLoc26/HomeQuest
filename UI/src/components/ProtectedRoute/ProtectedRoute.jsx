@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import axios from "../../api/axios";
-import { useStore, actions } from "../../store";
+import axios from "~/api/axios";
+import { useStore, actions } from "~/store";
 
 function ProtectedRoute() {
 	const [state, dispatch] = useStore();

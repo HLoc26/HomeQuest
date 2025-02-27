@@ -1,11 +1,8 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import ThemeButton from "../../ThemeButton/ThemeButton";
-import { Dropdown, Button, ButtonGroup, Offcanvas } from "react-bootstrap";
-import { useStore } from "../../../store";
+import { Container, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
 import { useState } from "react";
+
+import { useStore } from "~/store";
+import ThemeButton from "~/components/ThemeButton/ThemeButton";
 
 function NavBar() {
 	const [state] = useStore();

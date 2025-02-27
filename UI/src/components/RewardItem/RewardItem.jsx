@@ -1,5 +1,5 @@
-import goldImg from "../../assets/gold.png";
-import expImg from "../../assets/exp.png";
+import goldImg from "~/assets/gold.png";
+import expImg from "~/assets/exp.png";
 function RewardItem({ type, amount }) {
 	return (
 		<div className="d-flex flex-column align-items-center">

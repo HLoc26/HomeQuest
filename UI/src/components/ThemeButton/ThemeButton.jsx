@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 
-import { useStore, actions } from "../../store";
+import { useStore, actions } from "~/store";
 
 function ThemeButton() {
 	const [state, dispatch] = useStore();

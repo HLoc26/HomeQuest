@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button, Offcanvas } from "react-bootstrap";
-import axios from "../../api/axios.js";
+import axios from "~/api/axios.js";
 import styles from "./Dashboard.module.css";
-import { useStore } from "../../store";
-import { TaskList, DescriptionBoard } from "../../components";
+import { useStore } from "~/store";
+import { TaskList, DescriptionBoard } from "~/components";
 
 function Dashboard() {
 	const [state] = useStore();

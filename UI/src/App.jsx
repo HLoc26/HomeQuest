@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import { useStore } from "./store";
+import { useStore } from "~/store";
 import { useEffect } from "react";
 
 import "./App.css";
-import { ProtectedRoute, MainLayout } from "./components";
-import { Login, Dashboard, Profile } from "./pages";
+import { ProtectedRoute, MainLayout } from "~/components";
+import { Login, Dashboard, Profile } from "~/pages";
 
 function App() {
 	const [state, dispatch] = useStore();

@@ -3,9 +3,8 @@ import { Alert, Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import api from "../../api/axios.js";
-import { useStore } from "../../store/hooks.js";
-import { actions } from "../../store";
+import api from "~/api/axios.js";
+import { useStore, actions } from "~/store";
 
 function Login() {
 	const [inputField, setInput] = useState({ usn: "", pwd: "" });

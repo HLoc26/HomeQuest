@@ -1,4 +1,4 @@
-import RewardItem from "../RewardItem/RewardItem";
+import RewardItem from "~/components/RewardItem/RewardItem";
 import styles from "./DescriptionBoard.module.css";
 function DescriptionBoard({ task }) {
 	console.log(task);
