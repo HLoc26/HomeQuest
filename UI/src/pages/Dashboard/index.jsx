@@ -1,19 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
-
 import { useStore } from "../../store";
+import styles from "./Dashboard.module.css";
 import axios from "../../api/axios.js";
 import TaskList from "../../components/TaskList/TaskList.jsx";
 import DescriptionBoard from "../../components/DescriptionBoard/DescriptionBoard.jsx";
+import { Button, Offcanvas } from "react-bootstrap";
 
 function Dashboard() {
 	const [state] = useStore();
 	const [allTasks, setAllTasks] = useState([]);
-	const [assignedTasks, setAssignedTasks] = useState([]); // user's assigned task
-	const [createdTasks, setCreatedTasks] = useState([]); // user's created task
+	const [assignedTasks, setAssignedTasks] = useState([]);
+	const [createdTasks, setCreatedTasks] = useState([]);
+	const [selectedTask, setSelectedTask] = useState(null);
+	const [showOffcanvas, setShowOffcanvas] = useState(false);
 
 	const user = state.user;
-
-	// console.log("Dashboard", user);
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -23,15 +24,12 @@ function Dashboard() {
 				axios.get("/task/created", { withCredentials: true }),
 			]);
 
-			// console.log("all", all.data);
 			if (all.data.success) setAllTasks(all.data.payload);
 			else console.error("All error", all.data.message);
 
-			// console.log("assign", assigned.data);
 			if (assigned.data.success) setAssignedTasks(assigned.data.payload);
 			else console.error("Assigned error", assigned.data.message);
 
-			// console.log("created", created.data);
 			if (created.data.success) setCreatedTasks(created.data.payload);
 			else console.error("Created error", created.data.message);
 		} catch (error) {
@@ -43,22 +41,69 @@ function Dashboard() {
 		fetchData();
 	}, [fetchData]);
 
+	const handleClose = () => setShowOffcanvas(false);
+	const handleShow = () => setShowOffcanvas(true);
+
 	return (
 		<div className="d-grid">
 			<h1 className="col-sm-12 text-center">Bảng nhiệm vụ</h1>
+			{/* Nút để mở Offcanvas trên màn hình nhỏ */}
+			<Button variant="primary" className="d-sm-none mb-3" onClick={handleShow}>
+				Xem TaskList
+			</Button>
 			<div className="row">
-				<div className="col-sm-4">
+				{/* TaskList hiển thị bình thường trên màn hình lớn */}
+				<div className={`col-sm-4 d-none d-sm-block ${styles.taskContainer}`}>
 					<h2>All tasks</h2>
-					<TaskList tasks={allTasks} emptyText="None" />
+					<TaskList tasks={allTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 					<h2>Assigned tasks</h2>
-					<TaskList tasks={assignedTasks} emptyText="None" />
+					<TaskList tasks={assignedTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 					<h2>Created tasks</h2>
-					<TaskList tasks={createdTasks} emptyText="None" />
+					<TaskList tasks={createdTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 				</div>
+
+				{/* DescriptionBoard */}
 				<div className="col-sm-8">
-					<DescriptionBoard description="Hello" />
+					<DescriptionBoard task={selectedTask} />
 				</div>
 			</div>
+			{/* Offcanvas cho TaskList trên màn hình nhỏ */}
+			<Offcanvas show={showOffcanvas} onHide={handleClose} responsive="sm">
+				<Offcanvas.Header closeButton>
+					<Offcanvas.Title>TaskList</Offcanvas.Title>
+				</Offcanvas.Header>
+				<Offcanvas.Body>
+					<div className={styles.taskContainer}>
+						<h2>All tasks</h2>
+						<TaskList
+							tasks={allTasks}
+							emptyText="None"
+							onTaskSelect={(task) => {
+								setSelectedTask(task);
+								handleClose();
+							}}
+						/>
+						<h2>Assigned tasks</h2>
+						<TaskList
+							tasks={assignedTasks}
+							emptyText="None"
+							onTaskSelect={(task) => {
+								setSelectedTask(task);
+								handleClose();
+							}}
+						/>
+						<h2>Created tasks</h2>
+						<TaskList
+							tasks={createdTasks}
+							emptyText="None"
+							onTaskSelect={(task) => {
+								setSelectedTask(task);
+								handleClose();
+							}}
+						/>
+					</div>
+				</Offcanvas.Body>
+			</Offcanvas>
 		</div>
 	);
 }
