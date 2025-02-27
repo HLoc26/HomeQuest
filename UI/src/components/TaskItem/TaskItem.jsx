@@ -8,7 +8,7 @@ function TaskItem({ task, setSelectedTask }) {
 			}}
 			className={styles.taskItem}
 		>
-			{task.title} - {task.type} - {task.difficulty} - xp: {task.xp_reward} - vàng: {task.gold_reward}
+			{task.title}
 		</li>
 	);
 }
