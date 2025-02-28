@@ -29,13 +29,21 @@ class AuthService {
 			if (!(await bcrypt.compare(pwd, userInDb.pwd))) {
 				throw new Error("Invalid username or password");
 			}
+			const user = {
+				userId: userInDb.id,
+				usn: userInDb.usn,
+				level: userInDb.level,
+				xp: userInDb.xp,
+				gold: userInDb.gold,
+				goldMultiplier: userInDb.gold_multiplier,
+			};
 
 			// Create token
-			const token = jwt.sign({ userId: userInDb.id, usn: userInDb.usn }, process.env.JWT_SECRET, {
+			const token = jwt.sign(user, process.env.JWT_SECRET, {
 				expiresIn: process.env.JWT_EXPIRES,
 			});
 
-			return { token, user: { userId: userInDb.id, usn: userInDb.usn } };
+			return { token, user };
 		} catch (error) {
 			// console.error(error)
 			throw new Error(`Login failed: ${error}`);
