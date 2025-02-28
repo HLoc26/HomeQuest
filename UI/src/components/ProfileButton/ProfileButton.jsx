@@ -9,23 +9,25 @@ function ProfileButton() {
 	const [state, dispatch] = useStore();
 	const user = state.user;
 	const theme = state.theme;
-
-	// Experience value
-	const experience = 60;
+	console.log(user);
 
 	return (
 		<Dropdown as={ButtonGroup} className="profile-button-group border">
-			<Button href="/user/me" variant={theme} className={`${styles.userBtn} d-flex align-items-center border`}>
+			<Button href="/user/me" variant={theme} className={`${styles.userBtn} d-flex align-items-center`}>
 				<div style={{ minWidth: "150px" }}>
 					<div className={styles.userName}>{user.usn}</div>
-					<ProgressBar
-						now={experience}
-						label={`${experience}%`}
-						variant="information"
-						style={{
-							height: "15px",
-						}}
-					/>
+					<div className="d-flex align-items-center gap-2">
+						<p className="m-0">Lv.{user.level}</p>
+						<ProgressBar
+							now={user.xp}
+							label={`${user.xp}%`}
+							variant="information"
+							style={{
+								height: "15px",
+								flexGrow: 1,
+							}}
+						/>
+					</div>
 				</div>
 			</Button>
 
