@@ -1,8 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { useStore } from "~/store";
-import { useEffect } from "react";
+import { useStore, actions } from "~/store";
+import { useCallback, useEffect } from "react";
 
 import "./App.css";
+import axios from "./api/axios.js";
 import { ProtectedRoute, MainLayout } from "~/components";
 import { Login, Dashboard, Profile } from "~/pages";
 
@@ -11,7 +12,15 @@ function App() {
 
 	const theme = state.theme;
 
+	const fetchXpReqs = useCallback(async () => {
+		const response = await axios.get("/user/xpReqs", { withCredentials: true });
+		const data = response.data.payload;
+		dispatch(actions.setXpReqs(data));
+	}, []);
+
+	// At app start
 	useEffect(() => {
+		fetchXpReqs();
 		// console.log("Hello");
 		const html = document.getElementsByTagName("html")[0];
 		if (theme == "light") {
@@ -19,7 +28,7 @@ function App() {
 		} else {
 			html.setAttribute("data-bs-theme", "dark");
 		}
-	}, []);
+	}, [fetchXpReqs]);
 
 	return (
 		<>
