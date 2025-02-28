@@ -12,7 +12,7 @@ function App() {
 	const theme = state.theme;
 
 	useEffect(() => {
-		console.log("Hello");
+		// console.log("Hello");
 		const html = document.getElementsByTagName("html")[0];
 		if (theme == "light") {
 			html.setAttribute("data-bs-theme", "light");

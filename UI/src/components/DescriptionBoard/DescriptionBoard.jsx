@@ -1,7 +1,7 @@
 import RewardItem from "~/components/RewardItem/RewardItem";
 import styles from "./DescriptionBoard.module.css";
 function DescriptionBoard({ task }) {
-	console.log(task);
+	// console.log(task);
 	return (
 		<>
 			{task ? (

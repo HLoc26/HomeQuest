@@ -32,7 +32,7 @@ function Dashboard() {
 			if (created.data.success) setCreatedTasks(created.data.payload);
 			else console.error("Created error", created.data.message);
 		} catch (error) {
-			console.log("Lỗi khi tải dữ liệu:", error.message);
+			// console.log("Lỗi khi tải dữ liệu:", error.message);
 		}
 	}, []);
 

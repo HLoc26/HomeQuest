@@ -15,7 +15,7 @@ function ProtectedRoute() {
 				const response = await axios.get("/user/me", {
 					withCredentials: true,
 				});
-				console.log(response.data);
+				// console.log(response.data);
 				if (response.data.success) {
 					dispatch(actions.setUser(response.data.payload));
 				}
