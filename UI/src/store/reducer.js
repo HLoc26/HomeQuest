@@ -1,7 +1,8 @@
-import { LOGIN, LOGOUT, SET_THEME, SET_USER } from "./constants";
+import { LOGIN, LOGOUT, SET_XP_REQS, SET_THEME, SET_USER } from "./constants";
 const initState = {
 	user: null,
 	theme: "dark",
+	xpReqs: [],
 };
 
 const reducer = (state, action) => {
@@ -22,6 +23,11 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				theme: action.payload,
+			};
+		case SET_XP_REQS:
+			return {
+				...state,
+				xpReqs: action.payload,
 			};
 
 		default:
