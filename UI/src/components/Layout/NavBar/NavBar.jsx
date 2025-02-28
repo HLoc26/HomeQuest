@@ -1,45 +1,58 @@
-import { Container, Nav, Navbar, NavDropdown, Offcanvas } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { useState } from "react";
-
 import { useStore } from "~/store";
-import ThemeButton from "~/components/ThemeButton/ThemeButton";
+import { ThemeButton, ProfileButton } from "~/components";
 
 function NavBar() {
 	const [state] = useStore();
-	const [offCanvasToggled, setOffCanvasToggled] = useState(false);
-
-	console.log(offCanvasToggled);
-
+	const theme = state.theme;
 	const expand = "sm";
-	return (
-		<>
-			<Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
-				<Container fluid>
-					<div>
-						<Navbar.Brand href="#">HomeQuest</Navbar.Brand>
-						<ThemeButton />
-					</div>
 
-					<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
-					<Navbar.Offcanvas id={`offcanvasNavbar-expand-${expand}`} aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`} placement="end">
-						<Offcanvas.Header closeButton>
-							<Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>Menu</Offcanvas.Title>
-						</Offcanvas.Header>
-						<Offcanvas.Body>
-							<Nav className="justify-content-end flex-grow-1 pe-3">
-								<Nav.Link href="/">Dashboard </Nav.Link>
-								<NavDropdown title={state.user.usn} id={`offcanvasNavbarDropdown-expand-${expand}`} align="end">
-									<NavDropdown.Item href="/user/me">Your profile</NavDropdown.Item>
-									<NavDropdown.Item href="/tasks">Your tasks</NavDropdown.Item>
-									<NavDropdown.Divider />
-									<NavDropdown.Item href="/logout">Log out</NavDropdown.Item>
-								</NavDropdown>
-							</Nav>
-						</Offcanvas.Body>
-					</Navbar.Offcanvas>
-				</Container>
-			</Navbar>
-		</>
+	return (
+		<Navbar expand={expand} className={`mb-3 shadow-sm ${theme === "dark" ? "bg-dark" : "bg-light"}`} sticky="top">
+			<Container fluid>
+				{/* Left Section */}
+				<div className="d-flex align-items-center gap-3">
+					<Navbar.Brand href="/" className="fw-bold d-flex align-items-center gap-2">
+						<span
+							style={{
+								fontSize: "1.5rem",
+								color: theme === "dark" ? "#fff" : "#333",
+							}}
+						>
+							HomeQuest
+						</span>
+					</Navbar.Brand>
+					<ThemeButton />
+				</div>
+
+				{/* Toggle for Mobile */}
+				<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} className="border-0" />
+
+				{/* Right Section / Offcanvas */}
+				<Navbar.Offcanvas
+					id={`offcanvasNavbar-expand-${expand}`}
+					aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+					placement="end"
+					className={theme === "dark" ? "bg-dark text-light" : "bg-light"}
+				>
+					<Offcanvas.Header closeButton className={theme === "dark" ? "border-secondary" : ""}>
+						<Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`} className={theme === "dark" ? "text-light" : ""}>
+							Menu
+						</Offcanvas.Title>
+					</Offcanvas.Header>
+
+					<Offcanvas.Body>
+						<Nav className="justify-content-end align-items-center flex-grow-1 gap-2 pe-3">
+							<Button href="/" variant={theme === "dark" ? "outline-light" : "outline-dark"} className="rounded-pill px-3 py-2">
+								Dashboard
+							</Button>
+							<ProfileButton />
+						</Nav>
+					</Offcanvas.Body>
+				</Navbar.Offcanvas>
+			</Container>
+		</Navbar>
 	);
 }
 
