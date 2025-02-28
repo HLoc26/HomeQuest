@@ -13,7 +13,7 @@ function App() {
 	const theme = state.theme;
 
 	const fetchXpReqs = useCallback(async () => {
-		const response = await axios.get("/user/xpReqs", { withCredentials: true });
+		const response = await axios.get("/xpReqs", { withCredentials: true });
 		const data = response.data.payload;
 		dispatch(actions.setXpReqs(data));
 	}, []);
