@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Offcanvas } from "react-bootstrap";
+import { Button, Offcanvas, Accordion } from "react-bootstrap";
 import axios from "~/api/axios.js";
 import styles from "./Dashboard.module.css";
 import { useStore } from "~/store";
@@ -53,12 +53,11 @@ function Dashboard() {
 			<div className="row">
 				{/* TaskList hiển thị bình thường trên màn hình lớn */}
 				<div className={`col-sm-3 d-none d-sm-block ${styles.taskContainer}`}>
-					<h2>All tasks</h2>
-					<TaskList tasks={allTasks} emptyText="None" onTaskSelect={setSelectedTask} />
-					<h2>Assigned tasks</h2>
-					<TaskList tasks={assignedTasks} emptyText="None" onTaskSelect={setSelectedTask} />
-					<h2>Created tasks</h2>
-					<TaskList tasks={createdTasks} emptyText="None" onTaskSelect={setSelectedTask} />
+					<Accordion>
+						<TaskList eventKey={1} listName="All tasks" tasks={allTasks} emptyText="None" onTaskSelect={setSelectedTask} />
+						<TaskList eventKey={2} listName="Assigned tasks" tasks={assignedTasks} emptyText="None" onTaskSelect={setSelectedTask} />
+						<TaskList eventKey={3} listName="Created tasks" tasks={createdTasks} emptyText="None" onTaskSelect={setSelectedTask} />
+					</Accordion>
 				</div>
 
 				{/* DescriptionBoard */}
@@ -73,33 +72,38 @@ function Dashboard() {
 				</Offcanvas.Header>
 				<Offcanvas.Body style={{ overflowY: "hidden" }}>
 					<div className={styles.taskContainer}>
-						<h2>All tasks</h2>
-						<TaskList
-							tasks={allTasks}
-							emptyText="None"
-							onTaskSelect={(task) => {
-								setSelectedTask(task);
-								handleClose();
-							}}
-						/>
-						<h2>Assigned tasks</h2>
-						<TaskList
-							tasks={assignedTasks}
-							emptyText="None"
-							onTaskSelect={(task) => {
-								setSelectedTask(task);
-								handleClose();
-							}}
-						/>
-						<h2>Created tasks</h2>
-						<TaskList
-							tasks={createdTasks}
-							emptyText="None"
-							onTaskSelect={(task) => {
-								setSelectedTask(task);
-								handleClose();
-							}}
-						/>
+						<Accordion>
+							<TaskList
+								eventKey={1}
+								listName="All tasks"
+								tasks={allTasks}
+								emptyText="None"
+								onTaskSelect={(task) => {
+									setSelectedTask(task);
+									handleClose();
+								}}
+							/>
+							<TaskList
+								eventKey={2}
+								listName="Assigned tasks"
+								tasks={assignedTasks}
+								emptyText="None"
+								onTaskSelect={(task) => {
+									setSelectedTask(task);
+									handleClose();
+								}}
+							/>
+							<TaskList
+								eventKey={3}
+								listName="Created tasks"
+								tasks={createdTasks}
+								emptyText="None"
+								onTaskSelect={(task) => {
+									setSelectedTask(task);
+									handleClose();
+								}}
+							/>
+						</Accordion>
 					</div>
 				</Offcanvas.Body>
 			</Offcanvas>
