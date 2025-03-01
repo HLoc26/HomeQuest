@@ -9,7 +9,6 @@ function ProfileButton() {
 	const [state, dispatch] = useStore();
 	const user = state.user;
 	const theme = state.theme;
-	console.log(user);
 
 	return (
 		<Dropdown as={ButtonGroup} className="profile-button-group border">
