@@ -16,5 +16,8 @@ COPY . .
 # Open port 3000
 EXPOSE 3000
 
+# Installing nodemon
+RUN npm install -g nodemon
+
 # Start the server
-CMD ["npm", "run", "start"]
+CMD ["nodemon", "--legacy-watch", "./src/server.js"]
