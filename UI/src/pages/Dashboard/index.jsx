@@ -53,7 +53,7 @@ function Dashboard() {
 			<div className="row">
 				{/* TaskList hiển thị bình thường trên màn hình lớn */}
 				<div className={`col-sm-3 d-none d-sm-block ${styles.taskContainer}`}>
-					<Accordion>
+					<Accordion alwaysOpen>
 						<TaskList eventKey={1} listName="All tasks" tasks={allTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 						<TaskList eventKey={2} listName="Assigned tasks" tasks={assignedTasks} emptyText="None" onTaskSelect={setSelectedTask} />
 						<TaskList eventKey={3} listName="Created tasks" tasks={createdTasks} emptyText="None" onTaskSelect={setSelectedTask} />
@@ -72,7 +72,7 @@ function Dashboard() {
 				</Offcanvas.Header>
 				<Offcanvas.Body style={{ overflowY: "hidden" }}>
 					<div className={styles.taskContainer}>
-						<Accordion>
+						<Accordion alwaysOpen>
 							<TaskList
 								eventKey={1}
 								listName="All tasks"
