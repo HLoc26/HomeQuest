@@ -62,7 +62,7 @@ function Dashboard() {
 
 				{/* DescriptionBoard */}
 				<div className="col">
-					<DescriptionBoard task={selectedTask} />
+					<DescriptionBoard task={selectedTask} setter={{ setAllTasks, setAssignedTasks, setCreatedTasks, setSelectedTask }} />
 				</div>
 			</div>
 			{/* Offcanvas cho TaskList trên màn hình nhỏ */}

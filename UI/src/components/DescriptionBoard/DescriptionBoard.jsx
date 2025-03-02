@@ -4,7 +4,7 @@ import styles from "./DescriptionBoard.module.css";
 import AssignButton from "../TaskInteractionButtons/AssignButton";
 import CompleteButton from "../TaskInteractionButtons/CompleteButton";
 import CancelButton from "../TaskInteractionButtons/CancelButton";
-function DescriptionBoard({ task }) {
+function DescriptionBoard({ task, setter }) {
 	const [state, dispatch] = useStore();
 	const user = state.user;
 
@@ -19,7 +19,7 @@ function DescriptionBoard({ task }) {
 							<RewardItem type={"gold"} amount={task.gold_reward} />
 							<RewardItem type={"exp"} amount={task.xp_reward} />
 						</div>
-						{task.status === "PENDING" && <AssignButton task={task} />}
+						{task.status === "PENDING" && <AssignButton task={task} setter={setter} />}
 						{task.assigned_to === user.userId && <CompleteButton task={task} />}
 						{task.created_by === user.userId && <CancelButton task={task} />}
 					</div>
