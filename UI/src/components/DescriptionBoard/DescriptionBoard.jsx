@@ -1,9 +1,13 @@
-import { Button } from "react-bootstrap";
-
+import { useStore } from "~/store";
 import RewardItem from "~/components/RewardItem/RewardItem";
 import styles from "./DescriptionBoard.module.css";
+import AssignButton from "../TaskInteractionButtons/AssignButton";
+import CompleteButton from "../TaskInteractionButtons/CompleteButton";
+import CancelButton from "../TaskInteractionButtons/CancelButton";
 function DescriptionBoard({ task }) {
-	console.log(task);
+	const [state, dispatch] = useStore();
+	const user = state.user;
+
 	return (
 		<>
 			{task ? (
@@ -15,7 +19,9 @@ function DescriptionBoard({ task }) {
 							<RewardItem type={"gold"} amount={task.gold_reward} />
 							<RewardItem type={"exp"} amount={task.xp_reward} />
 						</div>
-						<Button className="rounded-pill px-3 py-2 btn btn-outline-light my-3">Nhận nhiệm vụ</Button>
+						{task.status === "PENDING" && <AssignButton task={task} />}
+						{task.assigned_to === user.userId && <CompleteButton task={task} />}
+						{task.created_by === user.userId && <CancelButton task={task} />}
 					</div>
 				</div>
 			) : (
