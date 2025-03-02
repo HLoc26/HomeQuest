@@ -12,5 +12,9 @@ class TaskService {
 	static getCreated(id) {
 		return Task.findAll({ where: { created_by: id } });
 	}
+
+	static assignTask(userId, taskId) {
+		return Task.update({ status: "ASSIGNED", assigned_to: userId }, { where: { id: taskId } });
+	}
 }
 export default TaskService;

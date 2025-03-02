@@ -16,6 +16,15 @@ const TaskController = {
 		const user = decode(req.cookies.jwt);
 		return await TaskService.getCreated(user.userId);
 	}),
+	assignTask: handleRequest(async (req) => {
+		try {
+			const { userId, taskId } = req.body;
+			const [res] = await TaskService.assignTask(userId, taskId);
+			return res;
+		} catch (error) {
+			console.error(error);
+		}
+	}),
 };
 
 export default TaskController;
