@@ -4,7 +4,7 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useStore } from "~/store";
 import styles from "./ProfileButton.module.css";
-
+import goldImg from "~/assets/coin.png";
 function ProfileButton() {
 	const [state, dispatch] = useStore();
 	const user = state.user;
@@ -14,7 +14,13 @@ function ProfileButton() {
 		<Dropdown as={ButtonGroup} className="profile-button-group border">
 			<Button href="/user/me" variant={theme} className={`${styles.userBtn} d-flex align-items-center`}>
 				<div style={{ minWidth: "150px" }}>
-					<div className={styles.userName}>{user.usn}</div>
+					<div className={`${styles.userName} d-flex`}>
+						<span className="flex-grow-1">{user.usn}</span>
+						<div className="d-flex gap-2 align-items-center">
+							<img src={goldImg} width={"20px"} height={"20px"} />
+							{user.gold}
+						</div>
+					</div>
 					<div className="d-flex align-items-center gap-2">
 						<p className="m-0">Lv.{user.level}</p>
 						<ProgressBar
