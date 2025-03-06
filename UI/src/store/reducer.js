@@ -13,7 +13,10 @@ const reducer = (state, action) => {
 				user: action.payload,
 			};
 		case LOGOUT:
-			break;
+			return {
+				...state,
+				user: null,
+			};
 		case SET_USER:
 			return {
 				...state,
