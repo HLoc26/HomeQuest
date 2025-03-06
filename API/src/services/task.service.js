@@ -16,5 +16,8 @@ class TaskService {
 	static assignTask(userId, taskId) {
 		return Task.update({ status: "ASSIGNED", assigned_to: userId }, { where: { id: taskId } });
 	}
+	static createTask(taskData) {
+		return Task.create(taskData);
+	}
 }
 export default TaskService;

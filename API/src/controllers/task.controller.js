@@ -25,6 +25,11 @@ const TaskController = {
 			console.error(error);
 		}
 	}),
+	createTask: handleRequest(async (req) => {
+		const taskData = req.body;
+		const newTask = await TaskService.createTask(taskData);
+		return newTask;
+	}),
 };
 
 export default TaskController;
