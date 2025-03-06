@@ -1,5 +1,4 @@
 import { Button, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
-import { useState } from "react";
 import { useStore } from "~/store";
 import { ThemeButton, ProfileButton } from "~/components";
 
@@ -44,9 +43,6 @@ function NavBar() {
 
 					<Offcanvas.Body>
 						<Nav className="justify-content-end align-items-center flex-grow-1 gap-2 pe-3">
-							<Button href="/" variant={theme === "dark" ? "outline-light" : "outline-dark"} className="rounded-pill px-3 py-2">
-								Dashboard
-							</Button>
 							<ProfileButton />
 						</Nav>
 					</Offcanvas.Body>
