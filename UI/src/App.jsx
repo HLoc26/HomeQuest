@@ -5,7 +5,7 @@ import { useCallback, useEffect } from "react";
 import "./App.css";
 import axios from "./api/axios.js";
 import { ProtectedRoute, MainLayout } from "~/components";
-import { Login, Dashboard, Profile, Logout, CreateTask, CompletedTasks } from "~/pages";
+import { Login, Dashboard, Profile, Logout, CreateTask, CompletedTasks, ProvideProof } from "~/pages";
 
 function App() {
 	const [state, dispatch] = useStore();
@@ -72,6 +72,14 @@ function App() {
 						element={
 							<MainLayout>
 								<CompletedTasks />
+							</MainLayout>
+						}
+					/>
+					<Route
+						path="/tasks/proof"
+						element={
+							<MainLayout>
+								<ProvideProof />
 							</MainLayout>
 						}
 					/>
