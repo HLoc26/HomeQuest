@@ -7,5 +7,6 @@ taskRouter.get("/assigned", TaskController.getAssigned);
 taskRouter.get("/created", TaskController.getCreated);
 taskRouter.post("/assign", TaskController.assignTask);
 taskRouter.post("/create", TaskController.createTask);
+taskRouter.post("/complete", TaskController.completeTask);
 
 export default taskRouter;

@@ -19,5 +19,8 @@ class TaskService {
 	static createTask(taskData) {
 		return Task.create(taskData);
 	}
+	static completeTask(taskId) {
+		return Task.update({ status: "DONE" }, { where: { id: taskId } });
+	}
 }
 export default TaskService;

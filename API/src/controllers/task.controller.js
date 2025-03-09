@@ -49,6 +49,31 @@ const TaskController = {
 			console.error(error);
 		}
 	}),
+	completeTask: handleRequest(async (req) => {
+		const { task } = req.body;
+		const token = req.cookies.jwt;
+		const user = decode(token);
+
+		const id = user.userId;
+
+		const assignedTasks = await TaskService.getAssigned(id);
+
+		console.log(assignedTasks);
+		console.log(task);
+
+		const taskExists = assignedTasks.some((assignedTask) => assignedTask.id === task.id);
+
+		if (!taskExists) {
+			throw new Error("Task not found");
+		}
+
+		try {
+			return await TaskService.completeTask(task.id);
+		} catch (error) {
+			console.error(error);
+			throw new Error(error.message);
+		}
+	}),
 };
 
 export default TaskController;
