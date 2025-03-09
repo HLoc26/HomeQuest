@@ -6,7 +6,6 @@ import axios from "~/api/axios";
 
 function CompleteButton({ task, setter }) {
 	const navigate = useNavigate();
-	console.log(task);
 	const handleComplete = useCallback(async () => {
 		if (task.proof_required) {
 			navigate("/tasks/proof", { state: { task } });
@@ -20,7 +19,6 @@ function CompleteButton({ task, setter }) {
 			},
 			{ withCredentials: true }
 		);
-		console.log(response);
 
 		if (response.data.success) {
 			setter.setAssignedTasks((prev) => prev.filter((t) => t.id !== task.id));

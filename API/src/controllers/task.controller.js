@@ -58,9 +58,6 @@ const TaskController = {
 
 		const assignedTasks = await TaskService.getAssigned(id);
 
-		console.log(assignedTasks);
-		console.log(task);
-
 		const taskExists = assignedTasks.some((assignedTask) => assignedTask.id === task.id);
 
 		if (!taskExists) {
