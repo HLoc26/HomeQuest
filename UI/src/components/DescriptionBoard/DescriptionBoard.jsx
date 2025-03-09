@@ -66,7 +66,7 @@ function DescriptionBoard({ task, setter }) {
 						</div>
 						<div className={`${styles.rewardPanel} d-flex flex-grow-1 justify-content-end`}>
 							{task.status === "PENDING" && <AssignButton task={task} setter={setter} />}
-							{task.assigned_to === user.userId && <CompleteButton task={task} />}
+							{task.assigned_to === user.userId && <CompleteButton task={task} setter={setter} />}
 							{task.created_by === user.userId && <CancelButton task={task} />}
 						</div>
 					</div>
