@@ -52,7 +52,7 @@ function AssignButton({ task, setter }) {
 	}, [user, task, setter]);
 
 	return (
-		<Button className="rounded-pill px-3 py-2 btn btn-outline-light my-3" onClick={handleAssign}>
+		<Button className="px-3 py-2 btn my-3" onClick={handleAssign}>
 			Nhận nhiệm vụ
 		</Button>
 	);
