@@ -45,11 +45,8 @@ function ProfileButton() {
 					{buttonContent}
 				</Button>
 				<Nav className="flex-column">
-					<Nav.Link href="/tasks" className={`${theme === "dark" ? "text-light" : "text-dark"} py-2 border-top`}>
-						Your tasks
-					</Nav.Link>
-					<Nav.Link href="/tasks/assigned" className={`${theme === "dark" ? "text-light" : "text-dark"} py-2 border-top`}>
-						Assigned Tasks
+					<Nav.Link href="/tasks/completed" className={`${theme === "dark" ? "text-light" : "text-dark"} py-2 border-top`}>
+						Completed Tasks
 					</Nav.Link>
 					<Nav.Link href="/tasks/create" className={`${theme === "dark" ? "text-light" : "text-dark"} py-2 border-top`}>
 						Create Task
@@ -69,8 +66,7 @@ function ProfileButton() {
 				</Button>
 				<Dropdown.Toggle split variant={theme} id="dropdown-split-basic" style={{ padding: "0.5rem 0.75rem" }} />
 				<Dropdown.Menu>
-					<Dropdown.Item href="/tasks">Your tasks</Dropdown.Item>
-					<Dropdown.Item href="/tasks/assigned">Assigned Tasks</Dropdown.Item>
+					<Dropdown.Item href="/tasks/completed">Completed Tasks</Dropdown.Item>
 					<Dropdown.Item href="/tasks/create">Create Task</Dropdown.Item>
 					<Dropdown.Divider />
 					<Dropdown.Item href="/logout">Log out</Dropdown.Item>
