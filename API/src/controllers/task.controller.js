@@ -27,8 +27,27 @@ const TaskController = {
 	}),
 	createTask: handleRequest(async (req) => {
 		const taskData = req.body;
-		const newTask = await TaskService.createTask(taskData);
-		return newTask;
+		const token = req.cookies.jwt;
+		const creator = decode(token);
+
+		const data = {
+			title: taskData.title,
+			description: taskData.description,
+			type: taskData.type,
+			difficulty: taskData.difficulty,
+			assigned_to: null,
+			xp_reward: taskData.xpReward,
+			gold_reward: taskData.goldReward,
+			created_by: creator.userId,
+			proof_required: taskData.proofRequired,
+		};
+
+		try {
+			const newTask = await TaskService.createTask(data);
+			return newTask;
+		} catch (error) {
+			console.error(error);
+		}
 	}),
 };
 
