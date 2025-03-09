@@ -10,6 +10,7 @@ function CreateTask() {
 	const [xpReward, setXpReward] = useState(0);
 	const [goldReward, setGoldReward] = useState(0);
 	const [error, setError] = useState("");
+	const [proofRequired, setProofRequired] = useState(false);
 
 	const difficultyValues = {
 		EASY: 60,
@@ -55,7 +56,7 @@ function CreateTask() {
 		}
 
 		try {
-			const response = await axios.post("/task/create", { title, description, type, difficulty, xpReward, goldReward }, { withCredentials: true });
+			const response = await axios.post("/task/create", { title, description, type, difficulty, xpReward, goldReward, proofRequired }, { withCredentials: true });
 			if (response.data.success) {
 				alert("Task created successfully!");
 			}
@@ -110,6 +111,13 @@ function CreateTask() {
 						<Form.Group controlId="goldReward">
 							<Form.Label>Gold Reward</Form.Label>
 							<Form.Control type="number" value={goldReward} onChange={(e) => setGoldReward(Number(e.target.value))} required />
+						</Form.Group>
+					</Col>
+				</Row>
+				<Row className="mt-3">
+					<Col>
+						<Form.Group controlId="proofRequired">
+							<Form.Check type="switch" onChange={(e) => setProofRequired(e.target.checked)} checked={proofRequired} required label="Require proof" />
 						</Form.Group>
 					</Col>
 				</Row>
