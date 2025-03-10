@@ -7,7 +7,8 @@ import styles from "./DescriptionBoard.module.css";
 import AssignButton from "../TaskInteractionButtons/AssignButton";
 import CompleteButton from "../TaskInteractionButtons/CompleteButton";
 import CancelButton from "../TaskInteractionButtons/CancelButton";
-function DescriptionBoard({ task, setter }) {
+import { Button } from "react-bootstrap";
+function DescriptionBoard({ task }) {
 	const [userState] = useUser();
 	const [creator, setCreator] = useState(null);
 	const [assignee, setAssignee] = useState(null);
@@ -65,9 +66,10 @@ function DescriptionBoard({ task, setter }) {
 							<RewardItem type={"exp"} amount={task.xp_reward} />
 						</div>
 						<div className={`${styles.rewardPanel} d-flex flex-grow-1 justify-content-end`}>
-							{task.status === "PENDING" && <AssignButton task={task} setter={setter} />}
-							{task.assigned_to === user.userId && <CompleteButton task={task} setter={setter} />}
+							{task.status === "PENDING" && <AssignButton task={task} />}
+							{task.assigned_to === user.userId && <CompleteButton task={task} />}
 							{task.created_by === user.userId && <CancelButton task={task} />}
+							{task.status === "DONE" && <Button variant="secondary">Đã hoàn thành</Button>}
 						</div>
 					</div>
 				</div>
