@@ -31,7 +31,7 @@ function TaskProvider({ children }) {
 					title: "Nhiệm vụ đã hoàn thành",
 				},
 				selected: {
-					tasks: selectedTask,
+					task: selectedTask,
 					setter: setSelectedTask,
 					title: "Nhiệm vụ đang chọn",
 				},

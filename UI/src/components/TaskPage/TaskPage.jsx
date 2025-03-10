@@ -32,7 +32,7 @@ function TaskPage({ tasks, title }) {
 
 				{/* DescriptionBoard */}
 				<div className="col">
-					<DescriptionBoard task={selected} />
+					<DescriptionBoard task={selected.task} />
 				</div>
 			</div>
 			{/* Offcanvas cho TaskList trên màn hình nhỏ */}
