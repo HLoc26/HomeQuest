@@ -8,3 +8,4 @@ export { default as RewardItem } from "./RewardItem/RewardItem.jsx";
 export { default as TaskItem } from "./TaskItem/TaskItem.jsx";
 export { default as TaskList } from "./TaskList/TaskList.jsx";
 export { default as ThemeButton } from "./ThemeButton/ThemeButton.jsx";
+export { default as TaskPage } from "./TaskPage/TaskPage.jsx";
