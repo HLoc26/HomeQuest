@@ -1,10 +1,12 @@
 import styles from "./TaskItem.module.css";
-function TaskItem({ task, setSelectedTask }) {
+import { useTask } from "~/store";
+function TaskItem({ task }) {
+	const { selected } = useTask();
 	return (
 		<li
 			key={task.id}
 			onClick={() => {
-				setSelectedTask(task);
+				selected.setter(task);
 			}}
 			className={styles.taskItem}
 		>

@@ -4,7 +4,7 @@ import { Accordion } from "react-bootstrap";
 import styles from "./TaskList.module.css";
 import TaskItem from "~/components/TaskItem/TaskItem";
 
-function TaskList({ eventKey, listName, tasks, emptyText, onTaskSelect }) {
+function TaskList({ eventKey, listName, tasks, emptyText }) {
 	// prettier-ignore
 	return (
 		<Accordion.Item eventKey={eventKey}>
@@ -15,7 +15,6 @@ function TaskList({ eventKey, listName, tasks, emptyText, onTaskSelect }) {
 						<TaskItem
 							key={task.id}
 							task={task}
-							setSelectedTask={onTaskSelect}
 						/>)
 					: <p>{emptyText}</p>
 				}
@@ -24,4 +23,4 @@ function TaskList({ eventKey, listName, tasks, emptyText, onTaskSelect }) {
 	);
 }
 
-export default memo(TaskList);
+export default TaskList;
