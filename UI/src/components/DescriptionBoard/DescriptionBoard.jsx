@@ -1,6 +1,6 @@
 import { useEffect, useCallback, useState } from "react";
 
-import { useStore } from "~/store";
+import { useUser } from "~/store";
 import RewardItem from "~/components/RewardItem/RewardItem";
 import axios from "~/api/axios.js";
 import styles from "./DescriptionBoard.module.css";
@@ -8,10 +8,10 @@ import AssignButton from "../TaskInteractionButtons/AssignButton";
 import CompleteButton from "../TaskInteractionButtons/CompleteButton";
 import CancelButton from "../TaskInteractionButtons/CancelButton";
 function DescriptionBoard({ task, setter }) {
-	const [state, dispatch] = useStore();
+	const [userState] = useUser();
 	const [creator, setCreator] = useState(null);
 	const [assignee, setAssignee] = useState(null);
-	const user = state.user;
+	const user = userState.user;
 
 	useEffect(() => {
 		const fetchCreator = async () => {

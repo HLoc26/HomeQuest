@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useStore, actions } from "~/store";
+import { useUser, actions } from "~/store";
 
 function Logout() {
-	const [state, dispatch] = useStore();
+	const [userState, userDispatch] = useUser();
 	const navigate = useNavigate();
 
-	console.log(state);
+	console.log(userState);
 
 	useEffect(() => {
-		dispatch(actions.logOut());
+		userDispatch(actions.logOut());
 		navigate("/login");
-	}, [dispatch, navigate]);
+	}, [userDispatch, navigate]);
 
 	return null;
 }

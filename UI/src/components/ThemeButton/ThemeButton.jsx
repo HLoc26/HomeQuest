@@ -1,19 +1,19 @@
 import { Button } from "react-bootstrap";
 
-import { useStore, actions } from "~/store";
+import { useUser, actions } from "~/store";
 
 function ThemeButton() {
-	const [state, dispatch] = useStore();
-	const theme = state.theme;
+	const [userState, userDispatch] = useUser();
+	const theme = userState.theme;
 
 	const handleChangeTheme = () => {
 		const html = document.getElementsByTagName("html")[0];
 		if (theme == "light") {
 			html.setAttribute("data-bs-theme", "dark");
-			dispatch(actions.setTheme("dark"));
+			userDispatch(actions.setTheme("dark"));
 		} else {
 			html.setAttribute("data-bs-theme", "light");
-			dispatch(actions.setTheme("light"));
+			userDispatch(actions.setTheme("light"));
 		}
 	};
 

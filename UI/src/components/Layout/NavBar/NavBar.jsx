@@ -1,10 +1,10 @@
-import { Button, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
-import { useStore } from "~/store";
+import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { useUser } from "~/store";
 import { ThemeButton, ProfileButton } from "~/components";
 
 function NavBar() {
-	const [state] = useStore();
-	const theme = state.theme;
+	const [userState] = useUser();
+	const theme = userState.theme;
 	const expand = "sm";
 
 	return (

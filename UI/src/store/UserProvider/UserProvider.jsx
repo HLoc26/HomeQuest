@@ -4,9 +4,9 @@ import UserContext from "./UserContext";
 import reducer, { initState } from "./reducer";
 
 function UserProvider({ children }) {
-	const [state, dispatch] = useReducer(reducer, initState);
+	const [userState, userDispatch] = useReducer(reducer, initState);
 
-	return <UserContext.Provider value={[state, dispatch]}>{children}</UserContext.Provider>;
+	return <UserContext.Provider value={[userState, userDispatch]}>{children}</UserContext.Provider>;
 }
 
 export default UserProvider;

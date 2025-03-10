@@ -2,12 +2,12 @@ import { useCallback } from "react";
 import { Button } from "react-bootstrap";
 
 import axios from "~/api/axios.js";
-import { useStore } from "~/store";
+import { useUser } from "~/store";
 
 function AssignButton({ task, setter }) {
-	const [state, dispatch] = useStore();
+	const [userState] = useUser();
 
-	const user = state.user;
+	const user = userState.user;
 
 	const handleAssign = useCallback(async () => {
 		try {

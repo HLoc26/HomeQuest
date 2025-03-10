@@ -2,14 +2,14 @@ import { useMediaQuery } from "react-responsive";
 import { Button, ProgressBar, Nav } from "react-bootstrap";
 import Dropdown from "react-bootstrap/Dropdown";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { useStore } from "~/store";
+import { useUser } from "~/store";
 import styles from "./ProfileButton.module.css";
 import goldImg from "~/assets/coin.png";
 
 function ProfileButton() {
-	const [state] = useStore();
-	const user = state.user;
-	const theme = state.theme;
+	const [userState] = useUser();
+	const user = userState.user;
+	const theme = userState.theme;
 	const isSmallScreen = useMediaQuery({ maxWidth: 576 }); // Bootstrap's 'sm' breakpoint
 
 	// Common content for both button and dropdown

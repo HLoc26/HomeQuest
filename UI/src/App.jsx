@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useStore, actions } from "~/store";
+import { useUser, actions } from "~/store";
 import { useCallback, useEffect } from "react";
 
 import "./App.css";
@@ -8,14 +8,14 @@ import { ProtectedRoute, MainLayout } from "~/components";
 import { Login, Dashboard, Profile, Logout, CreateTask, CompletedTasks, ProvideProof } from "~/pages";
 
 function App() {
-	const [state, dispatch] = useStore();
+	const [userState, userDispatch] = useUser();
 
-	const theme = state.theme;
+	const theme = userState.theme;
 
 	const fetchXpReqs = useCallback(async () => {
 		const response = await axios.get("/xpReqs", { withCredentials: true });
 		const data = response.data.payload;
-		dispatch(actions.setXpReqs(data));
+		userDispatch(actions.setXpReqs(data));
 	}, []);
 
 	// At app start

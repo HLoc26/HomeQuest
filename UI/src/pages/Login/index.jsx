@@ -4,14 +4,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import api from "~/api/axios.js";
-import { useStore, actions } from "~/store";
+import { useUser, actions } from "~/store";
 
 function Login() {
 	const [inputField, setInput] = useState({ usn: "", pwd: "" });
 	const [errorText, setErrorText] = useState("");
 	const [showError, setShowError] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
-	const [state, dispatch] = useStore();
+	const [userState, userDispatch] = useUser();
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
@@ -23,7 +23,7 @@ function Login() {
 			const response = await api.post("/login", user, { withCredentials: true });
 			if (response.data.success) {
 				// console.log(response.data);
-				dispatch(actions.logIn(response.data.payload));
+				userDispatch(actions.logIn(response.data.payload));
 				navigate("/");
 			} else {
 				setErrorText("Invalid username or password");
@@ -79,7 +79,7 @@ function Login() {
 								onClick={() => {
 									setShowPassword((prev) => !prev);
 								}}
-								variant={state.theme}
+								variant={userState.theme}
 								className="border"
 							>
 								{showPassword ? <i className="bi bi-eye-slash-fill"></i> : <i className="bi bi-eye-fill"></i>}

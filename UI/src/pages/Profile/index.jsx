@@ -1,9 +1,9 @@
-import { useStore } from "~/store";
+import { useUser } from "~/store";
 
 function Profile() {
-	const [state] = useStore();
+	const [userState] = useUser();
 
-	const user = state.user;
+	const user = userState.user;
 
 	return (
 		<>
