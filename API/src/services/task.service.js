@@ -13,12 +13,18 @@ class TaskService {
 		return Task.findAll({ where: { created_by: id } });
 	}
 
+	static getCompleted(userId) {
+		return Task.findAll({ where: { status: "DONE", assigned_to: userId } });
+	}
+
 	static assignTask(userId, taskId) {
 		return Task.update({ status: "ASSIGNED", assigned_to: userId }, { where: { id: taskId } });
 	}
+
 	static createTask(taskData) {
 		return Task.create(taskData);
 	}
+
 	static completeTask(taskId) {
 		return Task.update({ status: "DONE" }, { where: { id: taskId } });
 	}

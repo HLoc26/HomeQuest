@@ -16,6 +16,18 @@ const TaskController = {
 		const user = decode(req.cookies.jwt);
 		return await TaskService.getCreated(user.userId);
 	}),
+	getCompleted: handleRequest(async (req) => {
+		const token = req.cookies.jwt;
+		const user = decode(token);
+
+		try {
+			const tasks = await TaskService.getCompleted(user.userId);
+			return tasks;
+		} catch (error) {
+			throw error;
+		}
+	}),
+
 	assignTask: handleRequest(async (req) => {
 		try {
 			const { userId, taskId } = req.body;
