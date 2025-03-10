@@ -6,15 +6,17 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import "./index.css";
 import App from "./App.jsx";
-import { GlobalProvider } from "./store";
+import { UserProvider } from "./store";
+import TaskProvider from "./store/TaskProvider/TaskProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
 	// <StrictMode>
-	<GlobalProvider>
-		<Router>
-			<App />
-		</Router>
-	</GlobalProvider>
+	<UserProvider>
+		<TaskProvider>
+			<Router>
+				<App />
+			</Router>
+		</TaskProvider>
+	</UserProvider>
 	// </StrictMode>
 );
-
