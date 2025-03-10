@@ -6,7 +6,7 @@ class TaskService {
 	}
 
 	static getAssigned(id) {
-		return Task.findAll({ where: { assigned_to: id } });
+		return Task.findAll({ where: { assigned_to: id, status: "ASSIGNED" } });
 	}
 
 	static getCreated(id) {
