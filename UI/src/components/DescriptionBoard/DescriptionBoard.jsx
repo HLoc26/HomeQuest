@@ -67,9 +67,13 @@ function DescriptionBoard({ task }) {
 						</div>
 						<div className={`${styles.rewardPanel} d-flex flex-grow-1 justify-content-end`}>
 							{task.status === "PENDING" && <AssignButton task={task} />}
-							{task.assigned_to === user.userId && <CompleteButton task={task} />}
+							{task.assigned_to === user.userId && task.status !== "DONE" && <CompleteButton task={task} />}
 							{task.created_by === user.userId && <CancelButton task={task} />}
-							{task.status === "DONE" && <Button variant="secondary">Đã hoàn thành</Button>}
+							{task.status === "DONE" && (
+								<Button variant="success" className="px-3 py-2 btn my-3" disabled>
+									Đã hoàn thành
+								</Button>
+							)}
 						</div>
 					</div>
 				</div>
