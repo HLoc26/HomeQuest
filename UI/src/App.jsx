@@ -5,7 +5,7 @@ import { useCallback, useEffect } from "react";
 import "./App.css";
 import axios from "./api/axios.js";
 import { ProtectedRoute, MainLayout } from "~/components";
-import { Login, Dashboard, Profile, Logout, CreateTask, CompletedTasks, ProvideProof } from "~/pages";
+import { Login, Dashboard, Profile, Logout, CreateTask, CompletedTasks, ProvideProof, ConfirmWork } from "~/pages";
 
 function App() {
 	const [userState, userDispatch] = useUser();
@@ -80,6 +80,14 @@ function App() {
 						element={
 							<MainLayout>
 								<ProvideProof />
+							</MainLayout>
+						}
+					/>
+					<Route
+						path="/tasks/:id/proof"
+						element={
+							<MainLayout>
+								<ConfirmWork />
 							</MainLayout>
 						}
 					/>
