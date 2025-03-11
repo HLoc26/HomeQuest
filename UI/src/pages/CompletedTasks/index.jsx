@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { TaskList } from "~/components";
 import axios from "~/api/axios";
 import { useTask } from "~/store";
 import TaskPage from "../../components/TaskPage/TaskPage";
