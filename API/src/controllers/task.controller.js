@@ -62,22 +62,8 @@ const TaskController = {
 		const taskData = req.body;
 		const token = req.cookies.jwt;
 		const creator = decode(token);
-
-		const data = {
-			title: taskData.title,
-			description: taskData.description,
-			type: taskData.type,
-			difficulty: taskData.difficulty,
-			assigned_to: null,
-			xp_reward: taskData.xpReward,
-			gold_reward: taskData.goldReward,
-			created_by: creator.userId,
-			proof_required: taskData.proofRequired,
-		};
-
 		try {
-			const newTask = await TaskService.createTask(data);
-			return newTask;
+			return await TaskService.createTask(creator, taskData);
 		} catch (error) {
 			console.error(error);
 		}
@@ -86,19 +72,10 @@ const TaskController = {
 		const { task } = req.body;
 		const token = req.cookies.jwt;
 		const user = decode(token);
-
-		const id = user.userId;
-
-		const assignedTasks = await TaskService.getAssigned(id);
-
-		const taskExists = assignedTasks.some((assignedTask) => assignedTask.id === task.id);
-
-		if (!taskExists) {
-			throw new Error("Task not found");
-		}
+		const userId = user.userId;
 
 		try {
-			return await TaskService.completeTask(task.id);
+			return await TaskService.completeTask(userId, task.id);
 		} catch (error) {
 			console.error(error);
 			throw new Error(error.message);
@@ -108,12 +85,7 @@ const TaskController = {
 		try {
 			const { taskId } = req.body;
 			const files = req.files;
-			const attachments = files.map((file) => ({
-				attachment_path: file.path,
-				task_id: taskId,
-			}));
-
-			return await AttachmentService.saveProof(attachments);
+			return await AttachmentService.saveProof(taskId, files);
 		} catch (error) {
 			throw error;
 		}
@@ -121,10 +93,8 @@ const TaskController = {
 	confirmCompleteTask: handleRequest(async (req) => {
 		try {
 			const { taskId } = req.body;
-
-			const proofStatusUpdated = await TaskService.approveProofStatus(taskId);
-			const taskConfirmed = await TaskService.confirmCompleteTask(taskId);
-			return { proofStatusUpdated, taskConfirmed };
+			const [taskConfirmed] = await TaskService.confirmCompleteTask(taskId);
+			return taskConfirmed;
 		} catch (error) {
 			throw error;
 		}

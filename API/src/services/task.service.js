@@ -21,20 +21,39 @@ class TaskService {
 		return Task.update({ status: "ASSIGNED", assigned_to: userId }, { where: { id: taskId } });
 	}
 
-	static createTask(taskData) {
-		return Task.create(taskData);
+	static createTask(creator, taskData) {
+		const data = {
+			title: taskData.title,
+			description: taskData.desciption,
+			type: taskData.type,
+			difficulty: taskData.difficulty,
+			assigned_to: null,
+			xp_reward: taskData.xpReward,
+			gold_reward: taskData.goldReward,
+			created_by: creator.userId,
+			proof_required: taskData.proofRequired,
+		};
+		return Task.create(data);
 	}
 
-	static completeTask(taskId) {
+	static async completeTask(userId, taskId) {
+		const assignedTasks = await this.getAssigned(userId);
+
+		const taskExists = assignedTasks.some((assigned) => assigned.id === taskId);
+
+		if (!taskExists) {
+			throw new Error("Task not found");
+		}
 		return Task.update({ status: "PENDING_CONFIRM" }, { where: { id: taskId } });
 	}
 
 	static approveProofStatus(taskId) {
-		return Task.update({ proof_status: "APPROVED" }, { where: { id: taskId } });
+		return;
 	}
 
-	static confirmCompleteTask(taskId) {
-		return Task.update({ status: "DONE" }, { where: { id: taskId } });
+	static async confirmCompleteTask(taskId) {
+		await Task.update({ proof_status: "APPROVED" }, { where: { id: taskId } });
+		return await Task.update({ status: "DONE" }, { where: { id: taskId } });
 	}
 }
 export default TaskService;

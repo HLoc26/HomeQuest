@@ -1,7 +1,11 @@
 import { Attachment } from "../models/index.js";
 class AttachmentService {
-	static saveProof(attachments) {
-		return Attachment.bulkCreate(attachments);
+	static async saveProof(taskId, files) {
+		const attachments = files.map((file) => ({
+			attachment_path: file.path,
+			task_id: taskId,
+		}));
+		return await Attachment.bulkCreate(attachments);
 	}
 
 	static getAttachments(taskId) {
