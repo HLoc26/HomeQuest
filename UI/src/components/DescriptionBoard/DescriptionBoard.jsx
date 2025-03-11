@@ -66,7 +66,7 @@ function DescriptionBoard({ task }) {
 							<RewardItem type={"exp"} amount={task.xp_reward} />
 						</div>
 						<div className={`${styles.rewardPanel} d-flex flex-grow-1 justify-content-end`}>
-							{task.status === "PENDING" && <AssignButton task={task} />}
+							{task.status === "UNASSIGNED" && <AssignButton task={task} />}
 							{task.assigned_to === user.userId && task.status !== "DONE" && <CompleteButton task={task} />}
 							{task.created_by === user.userId && <CancelButton task={task} />}
 							{task.status === "DONE" && (
