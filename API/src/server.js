@@ -23,6 +23,8 @@ app.use(
 		credentials: true,
 	})
 );
+// Cấu hình để phục vụ file tĩnh từ thư mục 'uploads'
+app.use("/uploads", express.static("uploads"));
 
 app.use(cookieParser());
 
