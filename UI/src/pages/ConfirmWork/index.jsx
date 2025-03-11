@@ -25,7 +25,8 @@ function ConfirmWork() {
 
 	const handleApprove = async () => {
 		const response = await axios.post("/task/confirm", { taskId: selected.task.id }, { withCredentials: true });
-		console.log(response.data);
+		alert(`Đã xác nhận hoàn thành nhiệm vụ ${selected.task.title}`);
+		navigate("/");
 	};
 
 	const handleRequireMore = async () => {
