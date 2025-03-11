@@ -18,7 +18,7 @@ function CompletedTasks() {
 			}
 		}
 		fetchCompletedTasks();
-	});
+	}, []);
 
 	return (
 		<>
