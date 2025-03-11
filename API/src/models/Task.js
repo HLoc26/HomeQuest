@@ -9,9 +9,9 @@ Task.init(
 		title: { type: DataTypes.STRING, allowNull: false },
 		description: { type: DataTypes.STRING },
 		status: {
-			type: DataTypes.ENUM("DONE", "ASSIGNED", "PENDING"),
+			type: DataTypes.ENUM("DONE", "ASSIGNED", "UNASSIGNED", "PENDING_CONFIRM"),
 			allowNull: false,
-			defaultValue: "PENDING",
+			defaultValue: "UNASSIGNED",
 		},
 		type: { type: DataTypes.ENUM("DAILY", "WEEKLY", "MONTHLY", "EPIC"), allowNull: false },
 		difficulty: { type: DataTypes.ENUM("EASY", "MEDIUM", "HARD"), allowNull: false },
