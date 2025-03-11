@@ -7,6 +7,7 @@ import styles from "./DescriptionBoard.module.css";
 import AssignButton from "../TaskInteractionButtons/AssignButton";
 import CompleteButton from "../TaskInteractionButtons/CompleteButton";
 import CancelButton from "../TaskInteractionButtons/CancelButton";
+import ConfirmButton from "../TaskInteractionButtons/ConfirmButton";
 import { Button } from "react-bootstrap";
 function DescriptionBoard({ task }) {
 	const [userState] = useUser();
@@ -74,6 +75,7 @@ function DescriptionBoard({ task }) {
 									Đã hoàn thành
 								</Button>
 							)}
+							{task.status === "PENDING_CONFIRM" && task.created_by === user.userId && <ConfirmButton task={task} />}
 						</div>
 					</div>
 				</div>
