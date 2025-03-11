@@ -29,6 +29,26 @@ const TaskController = {
 		}
 	}),
 
+	getAttachments: handleRequest(async (req) => {
+		const taskId = req.query.taskId;
+		try {
+			const attachments = await AttachmentService.getAttachments(taskId);
+			if (!attachments.length) {
+				throw new Error("No attachment found");
+			}
+
+			// Tạo danh sách URL để React hiển thị ảnh
+			const baseUrl = `${req.protocol}://${req.get("host")}`;
+			const imageUrls = attachments.map((att) => ({
+				id: att.attachment_id,
+				url: `${baseUrl}/${att.attachment_path}`,
+			}));
+			return imageUrls;
+		} catch (error) {
+			throw error;
+		}
+	}),
+
 	assignTask: handleRequest(async (req) => {
 		try {
 			const { userId, taskId } = req.body;
@@ -98,7 +118,7 @@ const TaskController = {
 			throw error;
 		}
 	}),
-	confirmTask: handleRequest(async (req) => {
+	confirmCompleteTask: handleRequest(async (req) => {
 		try {
 			const { taskId } = req.body;
 

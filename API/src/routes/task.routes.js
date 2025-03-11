@@ -7,6 +7,7 @@ taskRouter.get("/all", TaskController.getAll);
 taskRouter.get("/assigned", TaskController.getAssigned);
 taskRouter.get("/created", TaskController.getCreated);
 taskRouter.get("/completed", TaskController.getCompleted);
+taskRouter.get("/attachments", TaskController.getAttachments);
 taskRouter.post("/assign", TaskController.assignTask);
 taskRouter.post("/create", TaskController.createTask);
 taskRouter.post("/complete", TaskController.completeTask);
