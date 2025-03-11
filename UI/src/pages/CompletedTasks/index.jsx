@@ -22,7 +22,7 @@ function CompletedTasks() {
 
 	return (
 		<>
-			<TaskPage tasks={[completed]} />
+			<TaskPage tasks={[completed]} title="Nhiệm vụ đã hoàn thành" />
 		</>
 	);
 }
