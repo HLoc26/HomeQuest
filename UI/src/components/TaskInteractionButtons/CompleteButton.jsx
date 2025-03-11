@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import axios from "~/api/axios";
+import { useTask } from "~/store";
 
 function CompleteButton({ task, setter }) {
 	const navigate = useNavigate();
+
+	const { assigned } = useTask();
+
 	const handleComplete = useCallback(async () => {
 		if (task.proof_required) {
 			navigate("/tasks/proof", { state: { task } });
@@ -21,9 +25,9 @@ function CompleteButton({ task, setter }) {
 		);
 
 		if (response.data.success) {
-			setter.setAssignedTasks((prev) => prev.filter((t) => t.id !== task.id));
+			assigned.setter((prev) => prev.filter((t) => t.id !== task.id));
 		}
-	}, [task, setter]);
+	}, [task, assigned, navigate]);
 
 	return (
 		<Button variant="success" className="px-3 py-2 btn my-3" onClick={handleComplete}>
