@@ -2,7 +2,7 @@ import { Attachment, Task } from "../models/index.js";
 
 class TaskService {
 	static getAll() {
-		return Task.findAll({ where: { status: "PENDING" } });
+		return Task.findAll({ where: { status: "UNASSIGNED" } });
 	}
 
 	static getAssigned(id) {
