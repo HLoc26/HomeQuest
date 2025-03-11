@@ -24,11 +24,12 @@ function ConfirmWork() {
 	}, [selected]);
 
 	const handleApprove = async () => {
-		await axios.post("/task/confirm", { taskId: selected.task.id });
+		const response = await axios.post("/task/confirm", { taskId: selected.task.id }, { withCredentials: true });
+		console.log(response.data);
 	};
 
 	const handleRequireMore = async () => {
-		await axios.post("/task/require-more", { taskId: selected.task.id });
+		await axios.post("/task/require-more", { taskId: selected.task.id }, { withCredentials: true });
 	};
 
 	return (
