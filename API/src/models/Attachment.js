@@ -14,6 +14,14 @@ Attachment.init(
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
+		task_id: {
+			type: DataTypes.INTEGER.UNSIGNED,
+			allowNull: false,
+			references: {
+				model: "Tasks",
+				key: "id",
+			},
+		},
 	},
 	{ sequelize, timestamps: false }
 );
