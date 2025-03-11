@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 
+import axios from "~/api/axios";
 import styles from "./ProvideProof.module.css";
+import { useTask } from "~/store";
 
 function ProvideProof() {
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const { assigned } = useTask();
+
 	const task = location.state?.task;
 
 	// State for selected files and previews
@@ -40,14 +45,39 @@ function ProvideProof() {
 		setPreviews((prevPreviews) => prevPreviews.filter((_, i) => i !== index));
 	};
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		// Here you would typically upload the files to your server
-		console.log("Files to upload:", selectedFiles);
+		const formData = new FormData();
+		formData.append("taskId", task.id);
+		selectedFiles.forEach((file) => {
+			formData.append("proof", file);
+		});
+		try {
+			const response = await axios.post("/task/proof", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+				withCredentials: true,
+			});
 
-		// Simple alert that file is upload, will implement post to backend later
-		console.log("Uploaded");
+			if (response.data.success) {
+				alert("Proof submitted!");
+				const response = await axios.post(
+					"/task/complete",
+					{
+						task: task,
+					},
+					{ withCredentials: true }
+				);
+				if (response.data.success) {
+					assigned.setter((prev) => prev.filter((t) => t.id !== task.id));
+				}
+				navigate("/");
+			}
+		} catch (error) {
+			console.error("Error submitting proof:", error);
+		}
 	};
 
 	return (
