@@ -20,10 +20,10 @@ Task.init(
 			allowNull: true,
 			validate: {
 				isValidAssignment(value) {
-					if (this.status !== "PENDING" && value == null) {
+					if (this.status !== "UNASSIGNED" && value == null) {
 						throw new Error("Task đã được giao thì 'assigned_to' không thể là NULL.");
 					}
-					if (this.status === "PENDING" && value != null) {
+					if (this.status === "UNASSIGNED" && value != null) {
 						throw new Error("Task ở trạng thái 'PENDING' thì 'assigned_to' phải là NULL.");
 					}
 				},
