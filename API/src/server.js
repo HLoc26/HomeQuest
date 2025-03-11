@@ -11,6 +11,11 @@ const HOST = process.env.HOST_NAME;
 
 const app = express();
 
+app.use((req, res, next) => {
+	console.log(req.headers.origin);
+	next();
+});
+
 app.use(
 	cors({
 		origin: "http://localhost:5173",
