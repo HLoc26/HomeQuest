@@ -83,6 +83,20 @@ const TaskController = {
 			throw new Error(error.message);
 		}
 	}),
+	submitProof: handleRequest(async (req) => {
+		try {
+			const { taskId } = req.body;
+			const files = req.files;
+			const attachments = files.map((file) => ({
+				attachment_path: file.path,
+				task_id: taskId,
+			}));
+
+			return await TaskService.saveProof(attachments);
+		} catch (error) {
+			throw error;
+		}
+	}),
 };
 
 export default TaskController;

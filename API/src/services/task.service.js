@@ -1,4 +1,4 @@
-import { Task } from "../models/index.js";
+import { Attachment, Task } from "../models/index.js";
 
 class TaskService {
 	static getAll() {
@@ -27,6 +27,10 @@ class TaskService {
 
 	static completeTask(taskId) {
 		return Task.update({ status: "DONE" }, { where: { id: taskId } });
+	}
+
+	static saveProof(attachments) {
+		return Attachment.bulkCreate(attachments);
 	}
 }
 export default TaskService;
