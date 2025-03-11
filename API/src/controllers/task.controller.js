@@ -123,7 +123,7 @@ const TaskController = {
 			const { taskId } = req.body;
 
 			const proofStatusUpdated = await TaskService.approveProofStatus(taskId);
-			const taskConfirmed = await TaskService.confirmTask(taskId);
+			const taskConfirmed = await TaskService.confirmCompleteTask(taskId);
 			return { proofStatusUpdated, taskConfirmed };
 		} catch (error) {
 			throw error;
