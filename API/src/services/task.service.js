@@ -26,6 +26,14 @@ class TaskService {
 	}
 
 	static completeTask(taskId) {
+		return Task.update({ status: "PENDING_CONFIRM" }, { where: { id: taskId } });
+	}
+
+	static approveProofStatus(taskId) {
+		return Task.update({ proof_status: "APPROVED" }, { where: { id: taskId } });
+	}
+
+	static confirmCompleteTask(taskId) {
 		return Task.update({ status: "DONE" }, { where: { id: taskId } });
 	}
 }

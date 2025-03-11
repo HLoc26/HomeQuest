@@ -1,3 +1,4 @@
+import AttachmentService from "../services/attachment.service.js";
 import TaskService from "../services/task.service.js";
 import { decode } from "../utils/decodeJwt.js";
 import { handleRequest } from "../utils/handleRequest.js";
@@ -92,7 +93,18 @@ const TaskController = {
 				task_id: taskId,
 			}));
 
-			return await TaskService.saveProof(attachments);
+			return await AttachmentService.saveProof(attachments);
+		} catch (error) {
+			throw error;
+		}
+	}),
+	confirmTask: handleRequest(async (req) => {
+		try {
+			const { taskId } = req.body;
+
+			const proofStatusUpdated = await TaskService.approveProofStatus(taskId);
+			const taskConfirmed = await TaskService.confirmTask(taskId);
+			return { proofStatusUpdated, taskConfirmed };
 		} catch (error) {
 			throw error;
 		}

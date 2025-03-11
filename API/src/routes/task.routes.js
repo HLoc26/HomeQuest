@@ -11,5 +11,6 @@ taskRouter.post("/assign", TaskController.assignTask);
 taskRouter.post("/create", TaskController.createTask);
 taskRouter.post("/complete", TaskController.completeTask);
 taskRouter.post("/proof", upload.array("proof"), TaskController.submitProof);
+taskRouter.post("/confirm", TaskController.confirmCompleteTask);
 
 export default taskRouter;
