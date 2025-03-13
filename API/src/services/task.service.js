@@ -1,4 +1,6 @@
-import { Attachment, Task } from "../models/index.js";
+import { Task } from "../models/index.js";
+
+import UserService from "./user.service.js";
 
 class TaskService {
 	static getAll() {
@@ -53,6 +55,17 @@ class TaskService {
 
 	static async confirmCompleteTask(taskId) {
 		await Task.update({ proof_status: "APPROVED" }, { where: { id: taskId } });
+
+		const task = await Task.findOne({ where: { id: taskId } });
+
+		const assigneeId = task.assigned_to;
+
+		if (!assigneeId) {
+			throw new Error("Nhiệm vụ chưa được giao");
+		}
+
+		await UserService.completeTask(assigneeId, task.xp_reward, task.gold_reward);
+
 		return await Task.update({ status: "DONE" }, { where: { id: taskId } });
 	}
 }
