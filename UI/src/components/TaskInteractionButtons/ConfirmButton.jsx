@@ -9,6 +9,7 @@ function ConfirmButton({ task }) {
 		try {
 			if (task.proof_required) {
 				navigate(`/tasks/${task.id}/proof`);
+				return;
 			}
 			const response = await axios.post(
 				"/task/confirm",
